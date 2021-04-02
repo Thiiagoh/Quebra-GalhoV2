@@ -61,8 +61,8 @@
                                         $Email->SMTPAuth = true; //Ativa e-mail autenticado
                                         $Email->Host = 'smtp.gmail.com'; // Servidor de envio # verificar qual o host correto com a hospedagem as vezes fica como smtp.
                                         $Email->Port = '587'; // Porta de envio - verificar com o servidor
-                                        $Email->Username = 'root.thuask@gmail.com'; //e-mail que será autenticado
-                                        $Email->Password = 'Needforspeedcarbon2019'; // senha do email
+                                        $Email->Username = ''; //e-mail que será autenticado
+                                        $Email->Password = ''; // senha do email
                                         // ativa o envio de e-mails em HTML, se false, desativa.
                                         $Email->IsHTML(true); 
                                         // email do remetente da mensagem
