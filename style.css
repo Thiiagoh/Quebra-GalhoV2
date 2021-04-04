@@ -196,7 +196,7 @@ header{
 
 .caard-body{
   cursor: pointer;
-  padding: 1.3rem 1rem;
+  padding: 1.3rem 1rem .3rem;
   display: flex;
   align-items: center;
 }
@@ -219,8 +219,10 @@ header{
 }
 
 .caard-footer{
-  padding: .2rem 1rem;
+  padding: .2rem 1rem .8rem;
   background: #f9fafc;
+  display: flex;
+  justify-content: center;
 }
 
 .caard-footer a{
@@ -507,4 +509,41 @@ li.active {
     background-color: #ffffff2e;
     border-radius: 20px 0px 0px 20px;
     padding: 10px;
+}
+
+.float-button{
+    position: fixed;
+    z-index: 1;
+    bottom: 30px;
+    right: 50px;
+}
+
+.btn-add .float-button{
+    color: #fff;
+    background: var(--main-color);
+    border-radius: 50px;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    border: white;
+}
+
+.btn-add .float-button:hover{
+    opacity: .9;
+    cursor: pointer;
+    box-shadow: 0px 1px 5px var(--main-color);
+}
+
+.butao {
+  background: var(--main-color);
+  padding: .3rem;
+  border-radius: 7px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.butao:hover {
+  box-shadow: 1px 1px 3px var(--main-color);
 }

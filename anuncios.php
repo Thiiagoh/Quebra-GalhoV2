@@ -115,13 +115,55 @@
         </ul>
       </div>
     </header>
-
+    
     <main class="main">
-
+      <?php
+        $sql = mysqli_query($conecta, "select * from usuario where email ='$logado'");
+        while($exibe = mysqli_fetch_assoc($sql)){
+          $choose = $exibe["escolha"];
+          if ($choose == "2"){
+            echo '  <div class="btn-add">
+                      <a href="#">
+                        <button class="float-button">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </a>
+                    </div>';
+          }
+        }
+      ?>
       <h2 class="daash-title">Overview</h2>
-
       <div class="daash-cards">
         <!-- Colocar o loop dos trabalhadores no banco -->
+        <?php
+        $i=0;
+        $sql = mysqli_query($conecta, "select * from anuncio INNER JOIN usuario ON anuncio.idUser = usuario.idUser");
+        while($exibe = mysqli_fetch_assoc($sql)){
+          $idPostagem[$i] = $exibe["idAnuncio"];
+          $nomeA[$i] = $exibe["nome"];
+          $nomeB[$i] = $exibe["sobrenome"];
+          $emprego[$i] = $exibe["emprego"];
+
+          echo '  <div class="caard-single">
+                    <div class="caard-body">
+                      <span class="ti-briefcase"></span>
+                      <div>
+                        <h4>'.$nomeA[$i]." ".$nomeB[$i].'</h4>
+                        <h5>'.$emprego[$i].'</h5>
+                      </div>
+                    </div>
+                    <div class="caard-footer">
+                      <form action="teste.php" method="GET">
+                        <button name="id" value="'.$idPostagem[$i].'" class="butao d-flex justify-content-center align-items-center">Ver mais</button>
+                      </form>
+                    </div>
+                  </div>';
+          $i++;
+        }
+        ?>        
+
+
+
         <div class="caard-single">
           <div class="caard-body">
             <span class="ti-briefcase"></span>
@@ -134,6 +176,7 @@
             <a href="">Ver mais</a>
           </div>
         </div>
+
 
       </div>
 

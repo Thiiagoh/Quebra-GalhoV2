@@ -40,6 +40,27 @@
     $perfil = $exibe["avatar"];
     $namec = $exibe["nome"];
   }
+  $idPost = $_GET['id'];
+  $tenta_achar = "SELECT * FROM anuncio WHERE idAnuncio='$idPost'";
+  $resultado = $conecta->query($tenta_achar);
+  if ($resultado->num_rows >= 1){
+    $trocado = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser where anuncio.idAnuncio ='$idPost'");
+    while($exibe = mysqli_fetch_assoc($trocado)){
+      $nome = $exibe["nome"];
+      $sobrenome = $exibe["sobrenome"];
+      $cidade = $exibe["cidade"];
+      $estado = $exibe["estado"];
+      $emprego = $exibe["emprego"];
+      $avatar = $exibe["avatar"];
+    }
+  }else{
+    $nome = "Nome";
+    $sobrenome = "sobrenome";
+    $cidade = "Cidade";
+    $estado = "Estado";
+    $emprego = "Emprego";
+    $avatar = "user.png";
+  }
   ?>
 </head>
 <body>
@@ -108,19 +129,19 @@
                   <div class="profile-card__img">
                     <!-- <img src="images/img_perfil/<?php echo $perfil;?>"> -->
 
-                    <img src="images/img_perfil/<?php echo $perfil;?>" alt="profile card">
+                    <img src="images/img_perfil/<?php echo $avatar;?>" alt="profile card">
                   </div>
 
                   <div class="profile-card__cnt js-profile-cnt">
-                    <div class="profile-card__name">Muhammed Erdem</div>
-                    <div class="profile-card__txt">Front-end Developer from <strong>Mesopotamia</strong></div>
+                    <div class="profile-card__name"><?php echo $nome." ".$sobrenome;?></div>
+                    <div class="profile-card__txt"><?php echo $emprego;?> from <strong>Mesopotamia</strong></div>
                     <div class="profile-card-loc">
                       <span class="profile-card-loc__icon">
                         <svg class="icon"><use xlink:href="#icon-location"></use></svg>
                       </span>
 
                       <span class="profile-card-loc__txt">
-                        Istanbul, Turkey
+                        <?php echo $cidade;?>, <?php echo $estado;?>
                       </span>
                     </div>
 
