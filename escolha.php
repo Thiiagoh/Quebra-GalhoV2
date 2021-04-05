@@ -79,7 +79,6 @@
       }
       $conecta->close();
       ?>
-      <form class="login100-form validate-form flex-sb flex-w" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <div class="daash-cardsteste">
           <div class="caard-single">
             <div class="caard-body">
@@ -87,9 +86,13 @@
               <div>
                 <h4>TRABALHADOR AUTÔNOMO</h4>
                 <h5>Procurar uma oportunidade de emprego</h5>
-                <input type="text" name="escolha" value="1" hidden>
-                <button type="submit" name="escolher" href="#" class="btn btn-primary poointer">Escolher</button>
               </div>
+            </div>
+            <div class="caard-footer">
+              <form class="login100-form validate-form flex-sb flex-w" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <input type="text" name="escolha" value="1" hidden>
+                <button name="escolher" class="butao d-flex justify-content-center align-items-center">Escolher</button>
+              </form>
             </div>
           </div>
 
@@ -99,147 +102,16 @@
               <div>
                 <h4>CONTRATANTE</h4>
                 <h5>Buscando contratar profissionais autônomos</h5>
+              </div>
+            </div>
+            <div class="caard-footer">
+              <form class="login100-form validate-form flex-sb flex-w" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <input type="text" name="escolha" value="2" hidden>
-                <button type="submit" name="escolher" href="#" class="btn btn-primary poointer">Escolher</button>
-              </div>
+                <button name="escolher" class="butao d-flex justify-content-center align-items-center">Escolher</button>
+              </form>
             </div>
           </div>
         </div>
-      </form>
-
-      <!-- <section class="reecent">
-        <div class="aactivity-grid">
-          <div class="aactivity-card">
-            <h3>Atividade recente</h3>
-
-              <div class="taable-responsive">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Nome</th>
-                      <th>InicioStart Date</th>
-                      <th>End Date</th>
-                      <th>Team</th>
-                      <th>Status</th>
-                    </tr>    
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>App Development</td>
-                      <td>15 Aug, 2020</td>
-                      <td>22 Aug, 2020</td>
-                      <td class="td-team">
-                        <div class="iimg-1"></div>
-                        <div class="iimg-2"></div>
-                        <div class="iimg-3"></div>
-                      </td>
-                      <td>
-                        <span class="baadge success">Success</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Front-end Design</td>
-                      <td>15 Aug, 2020</td>
-                      <td>22 Aug, 2020</td>
-                      <td class="td-team">
-                        <div class="iimg-1"></div>
-                        <div class="iimg-2"></div>
-                        <div class="iimg-3"></div>
-                      </td>
-                      <td>
-                        <span class="baadge warning">Processing</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Web Development</td>
-                      <td>15 Aug, 2020</td>
-                      <td>22 Aug, 2020</td>
-                      <td class="td-team">
-                        <div class="iimg-1"></div>
-                        <div class="iimg-2"></div>
-                        <div class="iimg-3"></div>
-                      </td>
-                      <td>
-                        <span class="baadge success">Success</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Logo Design</td>
-                      <td>15 Aug, 2020</td>
-                      <td>22 Aug, 2020</td>
-                      <td class="td-team">
-                        <div class="iimg-1"></div>
-                        <div class="iimg-2"></div>
-                        <div class="iimg-3"></div>
-                      </td>
-                      <td>
-                        <span class="baadge warning">Processing</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Server setup</td>
-                      <td>15 Aug, 2020</td>
-                      <td>22 Aug, 2020</td>
-                      <td class="td-team">
-                        <div class="iimg-1"></div>
-                        <div class="iimg-2"></div>
-                        <div class="iimg-3"></div>
-                      </td>
-                      <td>
-                        <span class="baadge success">Success</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-            
-          </div>
-
-          <div class="suummary">
-            <div class="suummary-card">
-              <div class="suummary-single">
-                <span class="ti-id-badge"></span>
-                <div>
-                  <h5>196</h5>
-                  <small>Number of staff</small>
-                </div>
-              </div>
-              <div class="suummary-single">
-                <span class="ti-calendar"></span>
-                <div>
-                  <h5>16</h5>
-                  <small>Number of leave</small>
-                </div>
-              </div>
-              <div class="suummary-single">
-                <span class="ti-face-smile"></span>
-                <div>
-                  <h5>12</h5>
-                  <small>Profile update request</small>
-                </div>
-              </div>
-            </div>
-            <div class="bday-card">
-              <div class="bday-flex">
-                <div class="bday-img"></div>
-                <div class="bday-info">
-                  <h5>Dwayne F. Sanders</h5>
-                  <small>Birthday Today</small>
-                </div>
-              </div>
-              <div class="teext-center">
-                <button>
-                  <span class="ti-gift"></span>
-                  Wish him
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-          
-      </section> -->
-
     </main>
   </div>
 </body>

@@ -24,10 +24,43 @@
     }
     $perfil = $exibe["avatar"];
     $namec = $exibe["nome"];
+    $idConta = $exibe["idUser"];
   }
   ?>
 </head>
 <body>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Criar Anúncio de Serviço</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="emprego.php" method="POST">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Emprego</label>
+              <input class="form-control" type="text" name="nome_emprego" placeholder="Informe o emprego" maxlength="45" required>
+              <input type="text" name="iddaconta" value="<?php echo $idConta; ?>" hidden>
+            </div>
+            
+            <div class="form-group">
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Detalhes</label>
+                <textarea style="resize: vertical;" name="nome_detalhes" class="form-control" id="message-text"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="insertdata" class="btn btn-primary btn-sm poointer">Adicionar</button>
+            <button type="button" class="btn btn-secondary btn-sm poointer" data-dismiss="modal">Fechar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <input type="checkbox" id="siidebar-toggle">
   <div class="siidebar">
     <div class="siidebar-header">
@@ -109,7 +142,13 @@
           <i class="fas fa-caret-down"></i>
         </p>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-          <li><a class="dropdown-item" href="#">Alguma coisa</a></li>
+          <?php
+            if ($choose == "1"){
+              echo '<li><a class="dropdown-item" href="meus.php">Meus anúncios</a></li>';
+            }else{
+              echo '<li><a class="dropdown-item" href="#">Alguma coisa</a></li>';
+            }
+          ?>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="desconectar.php">Sair</a></li>
         </ul>
@@ -117,24 +156,24 @@
     </header>
     
     <main class="main">
+
       <?php
-        $sql = mysqli_query($conecta, "select * from usuario where email ='$logado'");
-        while($exibe = mysqli_fetch_assoc($sql)){
-          $choose = $exibe["escolha"];
-          if ($choose == "2"){
-            echo '  <div class="btn-add">
-                      <a href="#">
-                        <button class="float-button">
-                          <i class="fas fa-plus"></i>
-                        </button>
-                      </a>
-                    </div>';
-          }
+        if ($choose == "1"){
+          echo '  <div class="btn-add">
+                    <a href="#">
+                      <button class="float-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </a>
+                  </div>';
         }
       ?>
-      <h2 class="daash-title">Overview</h2>
+
+      
+
+
+      <h2 class="daash-title">Trabalhadores</h2>
       <div class="daash-cards">
-        <!-- Colocar o loop dos trabalhadores no banco -->
         <?php
         $i=0;
         $sql = mysqli_query($conecta, "select * from anuncio INNER JOIN usuario ON anuncio.idUser = usuario.idUser");
@@ -153,38 +192,20 @@
                       </div>
                     </div>
                     <div class="caard-footer">
-                      <form action="teste.php" method="GET">
+                      <form action="dados.php" method="GET">
                         <button name="id" value="'.$idPostagem[$i].'" class="butao d-flex justify-content-center align-items-center">Ver mais</button>
                       </form>
                     </div>
                   </div>';
           $i++;
         }
-        ?>        
-
-
-
-        <div class="caard-single">
-          <div class="caard-body">
-            <span class="ti-briefcase"></span>
-            <div>
-              <h4>Thiago Almeida</h4>
-              <h5>Programador</h5>
-            </div>
-          </div>
-          <div class="caard-footer">
-            <a href="">Ver mais</a>
-          </div>
-        </div>
-
+        ?> 
 
       </div>
-
       <section class="reecent">
         <div class="aactivity-grid">
           <div class="aactivity-card">
             <h3>Atividade recente</h3>
-
             <div class="taable-responsive">
               <table>
                 <thead>

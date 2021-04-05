@@ -53,7 +53,7 @@
       $cidade = $exibe["cidade"];
       $estado = $exibe["estado"];
       $cep = $exibe["cep"];
-      $descricao = $exibe["descricao"];
+      // $descricao = $exibe["descricao"];
       $numero = $exibe["numero"];
       $avatar = $exibe["avatar"];
     }
@@ -68,7 +68,7 @@
     $cidade = "";
     $estado = "Selecione";
     $cep = "";
-    $descricao = "";
+    // $descricao = "";
     $numero = "";
     $avatar = "user.png";
   }
@@ -120,7 +120,13 @@
           <i class="fas fa-caret-down"></i>
         </p>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-          <li><a class="dropdown-item" href="#">Alguma coisa</a></li>
+          <?php
+            if ($choose == "1"){
+              echo '<li><a class="dropdown-item" href="meus.php">Meus anúncios</a></li>';
+            }else{
+              echo '<li><a class="dropdown-item" href="#">Alguma coisa</a></li>';
+            }
+          ?>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="desconectar.php">Sair</a></li>
         </ul>
@@ -144,12 +150,14 @@
             $cidade = $_POST['cidade'];
             $estado = $_POST['estado'];
             $cep = $_POST['cep'];
-            $descricao = $_POST['descricao'];
+            // $descricao = $_POST['descricao'];
             $numero = $_POST['numero'];
 
         //Conectar no mysql
-            $conecta = mysqli_connect($nome_servidor, $nome_usuario, $senhaBanco, $nome_banco); 
-            $sql = "UPDATE usuario SET nome='$nome', sobrenome='$sobrenome', sexo='$sexo', emailcontato='$email', escolaridade='$grau', endereco='$endereco', complemento='$complemento', cidade='$cidade', estado='$estado', cep='$cep', descricao='$descricao', numero='$numero' WHERE idUser='$id'";
+            $conecta = mysqli_connect($nome_servidor, $nome_usuario, $senhaBanco, $nome_banco);
+            // $sql = "UPDATE usuario SET nome='$nome', sobrenome='$sobrenome', sexo='$sexo', emailcontato='$email', escolaridade='$grau', endereco='$endereco', complemento='$complemento', cidade='$cidade', estado='$estado', cep='$cep', descricao='$descricao', numero='$numero' WHERE idUser='$id'"; COMPLETO COM DESCRICAO
+
+            $sql = "UPDATE usuario SET nome='$nome', sobrenome='$sobrenome', sexo='$sexo', emailcontato='$email', escolaridade='$grau', endereco='$endereco', complemento='$complemento', cidade='$cidade', estado='$estado', cep='$cep', numero='$numero' WHERE idUser='$id'";
             if ($conecta->query($sql) === TRUE) {
               echo '  <div class="flex-sb-m w-full" style="justify-content: center;">
               <div class="alert alert-success fade show" role="alert">
@@ -305,10 +313,6 @@
                     <label for="inputCEP">CEP*</label>
                     <input type="cep" name="cep" value="<?php echo $cep;?>" placeholder="11111-111" class="form-control cep-mask" id="inputCEP" required>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Descrição*</label>
-                  <textarea class="form-control" name="descricao" id="exampleFormControlTextarea1" rows="3" required><?php echo $descricao;?></textarea>
                 </div>
                 <button type="submit" name="enviado" class="poointer btn btn-primary">Salvar</button>
               </form>
