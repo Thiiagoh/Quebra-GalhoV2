@@ -19,11 +19,12 @@
   $logado = $_SESSION['email'];
   $sql = mysqli_query($conecta, "select * from usuario where email ='$logado'");
   while($exibe = mysqli_fetch_assoc($sql)){
+    $id = $exibe["idUser"];
     $choose = $exibe["escolha"];
     if ($choose == "0"){
       echo "<script>window.location.href = 'escolha.php';</script>";
     }
-    if($choose == "2"){
+    if($choose == "1"){
       echo "<script>window.location.href = 'anuncios.php';</script>";
     }
     $perfil = $exibe["avatar"];
@@ -81,7 +82,7 @@
             if ($choose == "1"){
               echo '<li><a class="dropdown-item" href="meus.php">Meus anúncios</a></li>';
             }else{
-              echo '<li><a class="dropdown-item" href="#">Alguma coisa</a></li>';
+              echo '<li><a class="dropdown-item" href="meusemp.php">Meus autônomos</a></li>';
             }
           ?>
           <li><hr class="dropdown-divider"></li>
@@ -92,56 +93,18 @@
 
     <main class="main">
 
-      <h2 class="daash-title">Meus anúncios</h2>
+      <h2 class="daash-title">Meus autônomos</h2>
 
         <div class="daash-cards">
           <?php
           $i=0;
-          $sql = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser WHERE email = '$logado'");
+          //$sql = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser WHERE email = '$logado'");
+          $sql = mysqli_query($conecta, "select * from anuncio INNER JOIN usuario ON anuncio.idUser = usuario.idUser WHERE contratante='$id'");
           while($exibe = mysqli_fetch_assoc($sql)){
             $idPostagem[$i] = $exibe["idAnuncio"];
             $nomeA[$i] = $exibe["nome"];
             $nomeB[$i] = $exibe["sobrenome"];
             $emprego[$i] = $exibe["emprego"];
-            $detalhes[$i] = $exibe["detalhes"];
-            $idUser[$i] = $exibe["idUser"];
-
-            $delet[$i] = "DELETE FROM anuncio WHERE idAnuncio='$idPostagem[$i]' AND idUser='$idUser[$i]'";
-
-            echo '<div class="modal fade" id="a'.$idPostagem[$i].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Editar Anúncio de Serviço</h5>
-                          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <form action="empregorem.php" method="POST">
-                          <div class="modal-body">
-                            <div class="form-group">
-                              <label for="exampleFormControlInput1">Emprego</label>
-                              <input class="form-control" type="text" name="nome_emprego" placeholder="Informe o emprego" value="'.$emprego[$i].'" maxlength="45" required>
-                              <input type="text" name="iddaconta" value="'.$idPostagem[$i].'" hidden>
-                              <input type="text" name="deletar" value="'.$delet[$i].'" hidden>
-                            </div>
-                            
-                            <div class="form-group">
-                              <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Detalhes</label>
-                                <textarea style="resize: vertical;" name="nome_detalhes" class="form-control" id="message-text">'.$detalhes[$i].'</textarea>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="submit" name="opcao" value="0" class="btn btn-primary btn-sm poointer">Atualizar</button>
-                            <button type="submit" name="opcao" value="1" class="btn btn-danger btn-sm poointer">Excluir</button>
-                            <button type="button"  class="btn btn-secondary btn-sm poointer" data-bs-dismiss="modal">Fechar</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>';
 
             echo '  <div class="caard-single">
                       <div class="caard-body">
@@ -152,7 +115,7 @@
                         </div>
                       </div>
                       <div class="caard-footer">
-                          <button data-bs-toggle="modal" data-bs-target="#a'.$idPostagem[$i].'" class="butao d-flex justify-content-center align-items-center">Editar</button>
+                          <button class="butao d-flex justify-content-center align-items-center">Mensagem</button>
                       </div>
                     </div>';
             $i++;

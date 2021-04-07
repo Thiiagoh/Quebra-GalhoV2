@@ -546,6 +546,7 @@ li.active {
   color: white;
   cursor: pointer;
   margin-right: 10px;
+  outline-style: none;
 }
 
 .butao:hover {
