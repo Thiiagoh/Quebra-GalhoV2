@@ -275,13 +275,13 @@
                   
                     $con = mysqli_query($conecta, "select * from usuario where idUser='$contratante[$x]'");
                     while($exibir = mysqli_fetch_assoc($con)){
-                      $nomeConA = $exibir["nome"];
-                      $nomeConB = $exibir["sobrenome"];
+                      $nomeConA[$x] = $exibir["nome"];
+                      $nomeConB[$x] = $exibir["sobrenome"];
                     }
 
-                    if(empty($nomeConA) == true or empty($nomeConB) == true){
-                      $nomeConA = "";
-                      $nomeConB = "";
+                    if(empty($nomeConA[$x]) == true or empty($nomeConB[$x]) == true){
+                      $nomeConA[$x] = "";
+                      $nomeConB[$x] = "";
                     }
 
                     if($status[$x] == "Em aberto"){
@@ -293,7 +293,7 @@
                             <td>'.$nomeA[$x]." ".$nomeB[$x].'</td>
                             <td>'.$emprego[$x].'</td>
                             <td>'.$datinha[$x].'</td>
-                            <td>'.$nomeConA." ".$nomeConB.'</td>
+                            <td>'.$nomeConA[$x]." ".$nomeConB[$x].'</td>
                             <td>
                               <span class="baadge '.$estilo[$x].'">'.$status[$x].'</span>
                             </td>

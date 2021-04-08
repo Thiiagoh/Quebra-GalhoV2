@@ -114,9 +114,11 @@
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
           <?php
             if ($choose == "1"){
+              $hidden = "hidden";
               echo '<li><a class="dropdown-item" href="meus.php">Meus anúncios</a></li>';
             }else{
-              echo '<li><a class="dropdown-item" href="#">Alguma coisa</a></li>';
+              $hidden = "";
+              echo '<li><a class="dropdown-item" href="meusemp.php">Meus autônomos</a></li>';
             }
           ?>
           <li><hr class="dropdown-divider"></li>
@@ -230,8 +232,8 @@
 
                                   </div>-->
                                   <div class="profile-card-ctr">
-                                    <button class="profile-card__button button--blue">Mensagem</button>
-                                    <button type="submit" name="contratandoele" class="profile-card__button button--orange">Contratar</button>
+                                    <button class="profile-card__button button--blue" '.$hidden.'>Mensagem</button>
+                                    <button type="submit" name="contratandoele" class="profile-card__button button--orange" '.$hidden.'>Contratar</button>
                                   </div> ';
                           }
                       ?>
