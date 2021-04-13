@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
   <link rel="icon" type="image/png" href="images/icons/icon.ico"/>
-  <title>Meus anúncios</title>
+  <title>Meus Interesses</title>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -82,7 +82,7 @@
             if ($choose == "1"){
               echo '<li><a class="dropdown-item" href="meus.php">Meus anúncios</a></li>';
             }else{
-              echo '<li><a class="dropdown-item" href="meusemp.php">Meus autônomos</a></li>';
+              echo '<li><a class="dropdown-item" href="meusemp.php">Meus interesses</a></li>';
             }
           ?>
           <li><hr class="dropdown-divider"></li>
@@ -93,18 +93,22 @@
 
     <main class="main">
 
-      <h2 class="daash-title">Meus autônomos</h2>
+      <h2 class="daash-title">Meus Interesses</h2>
 
         <div class="daash-cards">
           <?php
           $i=0;
           //$sql = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser WHERE email = '$logado'");
-          $sql = mysqli_query($conecta, "select * from anuncio INNER JOIN usuario ON anuncio.idUser = usuario.idUser WHERE contratante='$id'");
+          $sql = mysqli_query($conecta, "select i.idInteresse, i.idUser, i.idAnuncio, a.emprego, u.nome, u.sobrenome, a.status from interesse i INNER JOIN anuncio a ON i.idAnuncio = a.idAnuncio INNER JOIN usuario u ON a.idUser = u.idUser where i.idUser='$id'");
           while($exibe = mysqli_fetch_assoc($sql)){
             $idPostagem[$i] = $exibe["idAnuncio"];
+            $idInteresse[$i] = $exibe["idInteresse"];
             $nomeA[$i] = $exibe["nome"];
             $nomeB[$i] = $exibe["sobrenome"];
             $emprego[$i] = $exibe["emprego"];
+            $status[$i] = $exibe["status"];
+
+            $delet[$i] = "DELETE FROM interesse WHERE idInteresse='$idInteresse[$i]'";
 
             echo '  <div class="caard-single">
                       <div class="caard-body">
@@ -114,10 +118,26 @@
                           <h5>'.$emprego[$i].'</h5>
                         </div>
                       </div>
-                      <div class="caard-footer">
-                          <button class="butao d-flex justify-content-center align-items-center">Mensagem</button>
-                      </div>
+                      <form action="empregorem.php" method="POST">
+                        <div class="caard-footer">
+                          <input type="text" name="deletarinteresse" value="'.$delet[$i].'" hidden>
+                          <input type="text" name="contratarPostagem" value="'.$idPostagem[$i].'" hidden>
+                          <input type="text" name="contratarPostagemId" value="'.$id.'" hidden>';
+            if($status[$i] == "Em aberto"){
+            echo '        <button class="butao d-flex justify-content-center align-items-center">Mensagem</button>
+                          <button class="butao d-flex justify-content-center align-items-center" type="submit" name="opcao" value="3">Contratar</button>
+                          <button class="butaored d-flex justify-content-center align-items-center" type="submit" name="opcao" value="2">Remover</button>
+                        </div>
+                      </form>
                     </div>';
+            }else{
+            echo '        <button class="butao d-flex justify-content-center align-items-center">Mensagem</button>
+                          <button class="butaored d-flex justify-content-center align-items-center" type="submit" name="opcao" value="2">Remover</button>
+                        </div>
+                      </form>
+                    </div>'; 
+            }
+            
             $i++;
           }
           ?> 

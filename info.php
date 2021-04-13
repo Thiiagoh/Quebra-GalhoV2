@@ -125,7 +125,7 @@
             if ($choose == "1"){
               echo '<li><a class="dropdown-item" href="meus.php">Meus anúncios</a></li>';
             }else{
-              echo '<li><a class="dropdown-item" href="#">Alguma coisa</a></li>';
+              echo '<li><a class="dropdown-item" href="#">Meus interesses</a></li>';
             }
           ?>
           <li><hr class="dropdown-divider"></li>

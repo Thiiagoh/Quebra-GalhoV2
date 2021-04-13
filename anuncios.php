@@ -15,10 +15,12 @@
     session_unset();
     echo "<script>window.location.href = 'index.php';</script>";
   }
+
   $logado = $_SESSION['email'];
   include_once "conectar.php";
   $sql = mysqli_query($conecta, "select * from usuario where email ='$logado'");
   while($exibe = mysqli_fetch_assoc($sql)){
+    $id = $exibe["idUser"];
     $choose = $exibe["escolha"];
     if ($choose == "0"){
       echo "<script>window.location.href = 'escolha.php';</script>";
@@ -26,6 +28,24 @@
     $perfil = $exibe["avatar"];
     $namec = $exibe["nome"];
     $idConta = $exibe["idUser"];
+    $membro = $exibe["membro"];
+    if ($membro != "Gratis"){
+      $dataMembro = $exibe["dataMembro"];
+      $datahoje = date('Y/m/d');
+      
+      $data1 = explode('-', $dataMembro);
+      $data2 = explode('/', $datahoje);
+      $d1 = strtotime("$data1[0]-$data1[1]-$data1[2]");
+      $d2 = strtotime("$data2[0]-$data2[1]-$data2[2]");
+      $datafinal = ($d1-$d2) / 86400;
+
+      if($datafinal <= 0){
+        $sql = "UPDATE usuario SET membro='Gratis', dataMembro=0 WHERE idUser='$id'";
+        $conecta->query($sql);
+        echo "<script>window.location.href = 'escolha.php';</script>";
+      }
+    }
+   
   }
   ?>
 </head>
@@ -74,10 +94,9 @@
         <form action="emprego.php" method="POST">
           <div class="modal-body">
             <h4>Seje membro e tenha mais anúncios</h4>
-            <p>Clique <a href="planos.php" class="tooltip-test" style="color: #ff8484;" title="Tooltip">aqui</a> para ver os planos disponiveis.</p>
+            <p>Clique <a href="assinar.php" class="tooltip-test" style="color: #ff8484;" title="Tooltip">aqui</a> para ver os planos disponiveis.</p>
           </div>
           <div class="modal-footer">
-            <button type="submit" id="insertdata" class="btn btn-primary btn-sm poointer">Adicionar</button>
             <button type="button" class="btn btn-secondary btn-sm poointer" data-bs-dismiss="modal">Fechar</button>
           </div>
         </form>
@@ -169,7 +188,7 @@
             if ($choose == "1"){
               echo '<li><a class="dropdown-item" href="meus.php">Meus anúncios</a></li>';
             }else{
-              echo '<li><a class="dropdown-item" href="meusemp.php">Meus autônomos</a></li>';
+              echo '<li><a class="dropdown-item" href="meusemp.php">Meus interesses</a></li>';
             }
           ?>
           <li><hr class="dropdown-divider"></li>
@@ -226,6 +245,7 @@
           $statusss[$i] = $exibe["status"];
 
           if($statusss[$i] == "Em aberto"){
+            
             echo '  <div class="caard-single">
                       <div class="caard-body">
                         <span class="ti-briefcase"></span>
@@ -240,7 +260,8 @@
                         </form>
                       </div>
                     </div>';
-          $i++;
+            $i++;
+            
           }
         }
         ?> 
@@ -378,13 +399,13 @@
                   <small>Número de contratados</small>
                 </div>
               </div>
-              <div class="suummary-single">
+              <!-- <div class="suummary-single">
                 <span class="ti-face-smile"></span>
                 <div>
                   <h5>12</h5>
                   <small>Profile update request</small>
                 </div>
-              </div>
+              </div> -->
             </div>
             <!-- <div class="bday-card">
               <div class="bday-flex">

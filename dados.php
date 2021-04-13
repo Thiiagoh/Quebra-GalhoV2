@@ -64,6 +64,13 @@
     $avatar = "user.png";
     $detalhe = "";
   }
+  $tenta_achar = "SELECT * FROM interesse WHERE idUser='$id' AND idAnuncio='$idPost'";
+  $resultado = $conecta->query($tenta_achar);
+  if ($resultado->num_rows > 0){
+    $adicion = "nao";
+  }else{
+    $adicion = "sim";
+  }
   ?>
 </head>
 <body>
@@ -118,7 +125,7 @@
               echo '<li><a class="dropdown-item" href="meus.php">Meus anúncios</a></li>';
             }else{
               $hidden = "";
-              echo '<li><a class="dropdown-item" href="meusemp.php">Meus autônomos</a></li>';
+              echo '<li><a class="dropdown-item" href="meusemp.php">Meus interesses</a></li>';
             }
           ?>
           <li><hr class="dropdown-divider"></li>
@@ -133,7 +140,6 @@
         <div class="aactivity-grid" style="grid-template-columns: 100%;">
           <div class="aactivity-card" style="background: var(--main-color);">
             <div class="aactivity-card-info">
-              <form action="contratante.php" method="POST">
                 <div class="wrapper">
                   <div class="profile-card js-profile-card">
                     <div class="profile-card__img">
@@ -142,8 +148,7 @@
 
                     <div class="profile-card__cnt js-profile-cnt">
                       <div class="profile-card__name"><?php echo $nome." ".$sobrenome;?></div>
-                      <input type="text" name="iddapost" value="<?php echo $idPost;?>" hidden>
-                      <input type="text" name="id" value="<?php echo $id;?>" hidden>
+                      
                       <div class="profile-card__txt"><strong><?php echo $emprego;?></strong></div>
                       <div class="profile-card__txt"><?php echo $detalhe;?></div>
                       <div class="profile-card-loc">
@@ -231,10 +236,24 @@
                                     </a>
 
                                   </div>-->
-                                  <div class="profile-card-ctr">
-                                    <button class="profile-card__button button--blue" '.$hidden.'>Mensagem</button>
-                                    <button type="submit" name="contratandoele" class="profile-card__button button--orange" '.$hidden.'>Contratar</button>
-                                  </div> ';
+                                  ';
+                                    
+                                  if($adicion == "sim"){
+                                        echo '
+                                        <form action="contratante.php" method="POST">
+                                          <div class="profile-card-ctr">
+                                            <input type="text" name="iddapost" value="'.$idPost.'" hidden>
+                                            <input type="text" name="id" value="'.$id.'" hidden>
+                                            <button type="submit" class="profile-card__button button--orange" '.$hidden.'>Adicionar a lista de interesse</button>
+                                          </div>
+                                        </form>';
+            
+                                      }else{
+                                          echo '
+                                          <div class="profile-card-ctr">
+                                          <button class="profile-card__button button--orange" '.$hidden.'>O autônomo já esta adicionado</button>
+                                          </div>';
+                                      }
                           }
                       ?>
                     </div>
@@ -258,9 +277,7 @@
 
                       <div class="profile-card__overlay js-message-close"></div>
                     </div> -->
-
                   </div>
-
                 </div>
 
                 <svg hidden="hidden" style="display: none;">
@@ -320,7 +337,6 @@
                   </defs>
                 </svg>
                 <!-- <button type="submit" name="enviado" class="poointer btn btn-primary">Salvar</button> -->
-              </form>
             </div>
           </div>
         </div>
