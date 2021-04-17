@@ -30,7 +30,7 @@
             header('location:meusemp.php');
             break;
         case 3:
-            $sql = "UPDATE anuncio SET status='Contratado', contratante='$id' WHERE idAnuncio='$iddapost'";
+            $sql = "UPDATE anuncio SET status='Pendente', contratante='$id' WHERE idAnuncio='$iddapost'";
             $conecta->query($sql);
             header('location:meusemp.php');
             break;
@@ -43,6 +43,11 @@
             $sql = "UPDATE usuario SET membro='Vip', dataMembro=DATE_ADD(now(), INTERVAL 30 DAY) WHERE idUser='$conta'";
             $conecta->query($sql);
             header('location:assinar.php');
+            break;
+        case 6:
+            $sql = "UPDATE anuncio SET status='Contratado' WHERE idAnuncio='$iddapost'";
+            $conecta->query($sql);
+            header('location:meus.php');
             break;
 	}
 ?>

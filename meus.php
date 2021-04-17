@@ -159,6 +159,22 @@
                             <button data-bs-toggle="modal" data-bs-target="#a'.$idPostagem[$i].'" class="butao d-flex justify-content-center align-items-center">Editar</button>
                         </div>
                       </div>';
+            }elseif ($status[$i] == "Pendente"){
+              echo '  <div class="caard-single">
+                        <div class="caard-body">
+                          <span class="ti-briefcase"></span>
+                          <div>
+                            <h4>'.$nomeA[$i]." ".$nomeB[$i].'</h4>
+                            <h5>Alguém está interessado!</h5>
+                          </div>
+                        </div>
+                        <form action="empregorem.php" method="POST">
+                          <div class="caard-footer">
+                              <input type="text" name="contratarPostagem" value="'.$idPostagem[$i].'" hidden>
+                              <button type="submit" name="opcao" value="6" class="butao d-flex justify-content-center align-items-center">Aceitar Pedido</button>
+                          </div>
+                        </form>
+                      </div>';
             }else{
               $off="";
             }
@@ -237,7 +253,7 @@
                                 <input type="text" name="deletar" value="'.$delet[$p].'" hidden>
                                 <input type="text" name="deletar2" value="'.$delet2[$p].'" hidden>
 
-                              <button class="butao d-flex justify-content-center align-items-center">Entrar em contato</button>
+                              <!-- <button class="butao d-flex justify-content-center align-items-center">Entrar em contato</button> -->
                               <button type="submit" name="opcao" value="1" class="butaored d-flex justify-content-center align-items-center">Excluir</button>
                           </div>
                         </form>

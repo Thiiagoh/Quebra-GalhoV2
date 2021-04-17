@@ -88,19 +88,19 @@
               <h2 class="title">Cadastrar</h2>
               <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input type="name" name="nome" placeholder="Nome" />
+                <input type="name" name="nome" placeholder="Nome" required>
               </div>
               <div class="input-field">
                 <i class="fas fa-envelope"></i>
-                <input type="email" name="email" placeholder="Email" />
+                <input type="email" name="email" placeholder="Email" required>
               </div>
               <div class="input-field">
                 <i class="fas fa-lock"></i>
-                <input type="password" name="senha" placeholder="Senha" />
+                <input type="password" name="senha" placeholder="Senha" required>
               </div>
               <div class="input-field">
                 <i class="fas fa-lock"></i>
-                <input type="password" name="senha2" placeholder="Confimar Senha" />
+                <input type="password" name="senha2" placeholder="Confimar Senha" required>
               </div>
               <?php
               if (isset($_POST['cadastroenviado'])){
@@ -144,7 +144,7 @@
                 $conecta->close();
               }
               ?>
-              <input type="submit" name="cadastroenviado" class="btn" value="Criar" />
+              <input type="submit" name="cadastroenviado" class="btn solid" value="Criar" />
             </form>
           </div>
         </div>

@@ -30,6 +30,7 @@
     $perfil = $exibe["avatar"];
     $namec = $exibe["nome"];
   }
+  $off="hidden";
   ?>
 </head>
 <body>
@@ -110,35 +111,89 @@
 
             $delet[$i] = "DELETE FROM interesse WHERE idInteresse='$idInteresse[$i]'";
 
-            echo '  <div class="caard-single">
-                      <div class="caard-body">
-                        <span class="ti-briefcase"></span>
-                        <div>
-                          <h4>'.$nomeA[$i]." ".$nomeB[$i].'</h4>
-                          <h5>'.$emprego[$i].'</h5>
-                        </div>
-                      </div>
-                      <form action="empregorem.php" method="POST">
-                        <div class="caard-footer">
-                          <input type="text" name="deletarinteresse" value="'.$delet[$i].'" hidden>
-                          <input type="text" name="contratarPostagem" value="'.$idPostagem[$i].'" hidden>
-                          <input type="text" name="contratarPostagemId" value="'.$id.'" hidden>';
             if($status[$i] == "Em aberto"){
-            echo '        <button class="butao d-flex justify-content-center align-items-center">Mensagem</button>
-                          <button class="butao d-flex justify-content-center align-items-center" type="submit" name="opcao" value="3">Contratar</button>
-                          <button class="butaored d-flex justify-content-center align-items-center" type="submit" name="opcao" value="2">Remover</button>
+              echo '  <div class="caard-single">
+                        <div class="caard-body">
+                          <span class="ti-briefcase"></span>
+                          <div>
+                            <h4>'.$nomeA[$i]." ".$nomeB[$i].'</h4>
+                            <h5>'.$emprego[$i].'</h5>
+                          </div>
                         </div>
-                      </form>
-                    </div>';
+                        <form action="empregorem.php" method="POST">
+                          <div class="caard-footer">
+                            <input type="text" name="deletarinteresse" value="'.$delet[$i].'" hidden>
+                            <input type="text" name="contratarPostagem" value="'.$idPostagem[$i].'" hidden>
+                            <input type="text" name="contratarPostagemId" value="'.$id.'" hidden>       
+                            <button class="butao d-flex justify-content-center align-items-center" type="submit" name="opcao" value="3">Pedir contato</button>
+                            <button class="butaored d-flex justify-content-center align-items-center" type="submit" name="opcao" value="2">Remover</button>
+                          </div>
+                        </form>
+                      </div>';
+            }elseif ($status[$i] == "Pendente"){
+              echo '  <div class="caard-single">
+                        <div class="caard-body">
+                          <span class="ti-briefcase"></span>
+                          <div>
+                            <h4>'.$nomeA[$i]." ".$nomeB[$i].'</h4>
+                            <h5>Pedido enviado, Pendente...</h5>
+                          </div>
+                        </div>
+                        <form action="empregorem.php" method="POST">
+                          <div class="caard-footer">
+                            <input type="text" name="deletarinteresse" value="'.$delet[$i].'" hidden>
+                            <input type="text" name="contratarPostagem" value="'.$idPostagem[$i].'" hidden>
+                            <input type="text" name="contratarPostagemId" value="'.$id.'" hidden>       
+                            <button class="butaored d-flex justify-content-center align-items-center" type="submit" name="opcao" value="2">Remover</button>
+                          </div>
+                        </form>
+                      </div>';
             }else{
-            echo '        <button class="butao d-flex justify-content-center align-items-center">Mensagem</button>
-                          <button class="butaored d-flex justify-content-center align-items-center" type="submit" name="opcao" value="2">Remover</button>
-                        </div>
-                      </form>
-                    </div>'; 
+              $off="";
             }
-            
+
             $i++;
+          }
+          ?> 
+        </div>
+        <h2 class="daash-title" <?php echo $off;?>>Pedidos Aceitos</h2>
+
+        <div class="daash-cards">
+          <?php
+          $p=0;
+          //$sql = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser WHERE email = '$logado'");
+          $sql = mysqli_query($conecta, "select i.idInteresse, i.idUser, i.idAnuncio, a.emprego, u.nome, u.sobrenome, a.status from interesse i INNER JOIN anuncio a ON i.idAnuncio = a.idAnuncio INNER JOIN usuario u ON a.idUser = u.idUser where i.idUser='$id'");
+          while($exibe = mysqli_fetch_assoc($sql)){
+            $idPostagem[$p] = $exibe["idAnuncio"];
+            $idInteresse[$p] = $exibe["idInteresse"];
+            $nomeA[$p] = $exibe["nome"];
+            $nomeB[$p] = $exibe["sobrenome"];
+            $emprego[$p] = $exibe["emprego"];
+            $status[$p] = $exibe["status"];
+
+            $delet[$p] = "DELETE FROM interesse WHERE idInteresse='$idInteresse[$p]'";
+
+            if($status[$p] == "Contratado"){
+              echo '  <div class="caard-single">
+                        <div class="caard-body">
+                          <span class="ti-briefcase"></span>
+                          <div>
+                            <h4>'.$nomeA[$p]." ".$nomeB[$p].'</h4>
+                            <h5>'.$emprego[$p].'</h5>
+                          </div>
+                        </div>
+                        <form action="empregorem.php" method="POST">
+                          <div class="caard-footer">
+                            <input type="text" name="deletarinteresse" value="'.$delet[$p].'" hidden>
+                            <input type="text" name="contratarPostagem" value="'.$idPostagem[$p].'" hidden>
+                            <input type="text" name="contratarPostagemId" value="'.$id.'" hidden>
+                            <button class="butao d-flex justify-content-center align-items-center">Entrar em contato</button>
+                            <button class="butaored d-flex justify-content-center align-items-center" type="submit" name="opcao" value="2">Remover</button>
+                          </div>
+                        </form>
+                      </div>';
+            }
+            $p++;
           }
           ?> 
         </div>

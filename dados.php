@@ -42,7 +42,7 @@
     $namec = $exibe["nome"];
   }
   $idPost = $_GET['id'];
-  $tenta_achar = "SELECT * FROM anuncio WHERE idAnuncio='$idPost'";
+  $tenta_achar = "SELECT * FROM anuncio WHERE idAnuncio='$idPost' AND status='Em aberto'";
   $resultado = $conecta->query($tenta_achar);
   if ($resultado->num_rows >= 1){
     $trocado = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser where anuncio.idAnuncio ='$idPost'");
@@ -57,7 +57,7 @@
     }
   }else{
     $nome = "Usuário";
-    $sobrenome = "não encontrado!";
+    $sobrenome = "não encontrado ou já foi contratado!";
     $cidade = "";
     $estado = "";
     $emprego = "";

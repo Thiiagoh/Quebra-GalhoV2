@@ -45,7 +45,15 @@
         echo "<script>window.location.href = 'escolha.php';</script>";
       }
     }
-   
+  }
+  if($membro == "Gratis"){
+    $limitePostagem = 2;
+  }
+  if($membro == "Membro"){
+    $limitePostagem = 5;
+  }
+  if($membro == "Vip"){
+    $limitePostagem = 10;
   }
   ?>
 </head>
@@ -213,7 +221,7 @@
         }
        
         if ($choose == "1"){
-          if($ii < 2){
+          if($ii < $limitePostagem){
             echo '  <div class="btn-add">
                     <a href="#">
                         <button class="float-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -300,7 +308,7 @@
                       $nomeConB[$x] = $exibir["sobrenome"];
                     }
 
-                    if(empty($nomeConA[$x]) == true or empty($nomeConB[$x]) == true){
+                    if(empty($nomeConA[$x]) == true or empty($nomeConB[$x]) == true or $status[$x] == "Pendente"){
                       $nomeConA[$x] = "";
                       $nomeConB[$x] = "";
                     }
