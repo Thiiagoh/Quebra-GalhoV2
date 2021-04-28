@@ -42,7 +42,7 @@
     $namec = $exibe["nome"];
   }
   $idPost = $_GET['id'];
-  $tenta_achar = "SELECT * FROM anuncio WHERE idAnuncio='$idPost' AND status='Em aberto'";
+  $tenta_achar = "SELECT * FROM anuncio WHERE idAnuncio='$idPost' AND (status='Em aberto' or status='Pendente')";
   $resultado = $conecta->query($tenta_achar);
   if ($resultado->num_rows >= 1){
     $trocado = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser where anuncio.idAnuncio ='$idPost'");

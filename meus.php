@@ -45,18 +45,18 @@
 
     <div class="siidebar-menu">
       <ul>
-        <li class="passando">
-          <a href="anuncios.php">
+        <a href="anuncios.php">
+          <li class="passando">
             <span class="ti-home"></span>
             <span>Anúncios</span>
-          </a>
-        </li>
-        <li class="passando">
-          <a href="info.php">
+          </li>
+        </a>
+        <a href="info.php">
+          <li class="passando">
             <span class="ti-settings"></span>
             <span>Conta</span>
-          </a>
-        </li>
+          </li>
+        </a>
       </ul>
     </div>
   </div>
@@ -98,7 +98,7 @@
         <div class="daash-cards">
           <?php
           $i=0;
-
+          $sd=0;
           $sql = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser WHERE email = '$logado'");
           while($exibe = mysqli_fetch_assoc($sql)){
             $idPostagem[$i] = $exibe["idAnuncio"];
@@ -108,6 +108,7 @@
             $detalhes[$i] = $exibe["detalhes"];
             $idUser[$i] = $exibe["idUser"];
             $status[$i] = $exibe["status"];
+            $detalheEm[$i] = $exibe["contratante"];
 
             $delet[$i] = "DELETE FROM anuncio WHERE idAnuncio='$idPostagem[$i]' AND idUser='$idUser[$i]'";
 
@@ -160,21 +161,59 @@
                         </div>
                       </div>';
             }elseif ($status[$i] == "Pendente"){
-              echo '  <div class="caard-single">
-                        <div class="caard-body">
-                          <span class="ti-briefcase"></span>
-                          <div>
-                            <h4>'.$nomeA[$i]." ".$nomeB[$i].'</h4>
-                            <h5>Alguém está interessado!</h5>
+              $sqla = mysqli_query($conecta, "select * from usuario WHERE idUser = '$detalheEm[$i]'");
+              while($exibe = mysqli_fetch_assoc($sqla)){
+                $nomeA[$sd] = $exibe["nome"];
+                $nomeB[$sd] = $exibe["sobrenome"];
+
+                echo '<div class="modal fade" id="a'.$idPostagem[$i].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Informações do Contratante</h5>
+                              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <form action="empregorem.php" method="POST">
+                              <div class="modal-body">
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Contratante: '.$nomeA[$sd].' '.$nomeB[$sd].'</label>
+                                </div>
+                                
+                                <div class="form-group">
+                                  <div class="mb-3">
+                                    <label for="exampleFormControlInput1">Emprego '.$nomeA[$sd].'</label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <!--<button type="submit" name="opcao" value="0" class="btn btn-primary btn-sm poointer">Atualizar</button>
+                                <button type="submit" name="opcao" value="1" class="btn btn-danger btn-sm poointer">Excluir</button>-->
+                                <button type="button"  class="btn btn-secondary btn-sm poointer" data-bs-dismiss="modal">Fechar</button>
+                              </div>
+                            </form>
                           </div>
                         </div>
-                        <form action="empregorem.php" method="POST">
-                          <div class="caard-footer">
-                              <input type="text" name="contratarPostagem" value="'.$idPostagem[$i].'" hidden>
-                              <button type="submit" name="opcao" value="6" class="butao d-flex justify-content-center align-items-center">Aceitar Pedido</button>
-                          </div>
-                        </form>
                       </div>';
+                echo '  <div class="caard-single">
+                          <div class="caard-body">
+                            <span class="ti-briefcase"></span>
+                            <div>
+                              <h4>'.$nomeA[$i]." ".$nomeB[$i].'</h4>
+                              <h5>Alguém está interessado!</h5>
+                            </div>
+                          </div>
+                          <div class="caard-footer">
+                            <form action="empregorem.php" method="POST">
+                                <input type="text" name="contratarPostagem" value="'.$idPostagem[$i].'" hidden>
+                                <button type="submit" name="opcao" value="6" class="butao d-flex justify-content-center align-items-center">Aceitar Pedido</button>
+                            </form>
+                                <button data-bs-toggle="modal" data-bs-target="#a'.$idPostagem[$i].'" class="butao2 d-flex justify-content-center align-items-center">Informações</button>
+                          </div>
+                        </div>';
+                $sd++;
+              }
             }else{
               $off="";
             }

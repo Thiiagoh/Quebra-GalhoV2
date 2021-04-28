@@ -123,12 +123,12 @@
 
     <div class="siidebar-menu">
       <ul>
-        <li class="passando active">
-          <a href="#">
+        <a href="#">
+          <li class="passando active">
             <span class="ti-home"></span>
             <span>Anúncios</span>
-          </a>
-        </li>
+          </li>
+        </a>
         <!-- <li>
           <a href="">
             <span class="ti-face-smile"></span>
@@ -165,12 +165,12 @@
             <span>Contacts</span>
           </a>
         </li> -->
-        <li class="passando">
-          <a href="info.php">
+        <a href="info.php">
+          <li class="passando">
             <span class="ti-settings"></span>
             <span>Conta</span>
-          </a>
-        </li>
+          </li>
+        </a>
       </ul>
     </div>
   </div>
@@ -179,7 +179,10 @@
     <header>
       <div class="seearch-wrapper">
         <span class="ti-search"></span>
-        <input type="search" placeholder="Search" name="">
+        <form action="" method="POST">
+          <!-- SELECT * FROM anuncios WHERE emprego LIKE '%ana%'; -->
+          <input type="search" placeholder="Search" name="search">
+        </form>
       </div>
 
       <div class="soocial-icons">
@@ -252,7 +255,7 @@
           $emprego[$i] = $exibe["emprego"];
           $statusss[$i] = $exibe["status"];
 
-          if($statusss[$i] == "Em aberto"){
+          if($statusss[$i] == "Em aberto" or $statusss[$i] == "Pendente"){
             
             echo '  <div class="caard-single">
                       <div class="caard-body">
