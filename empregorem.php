@@ -49,5 +49,11 @@
             $conecta->query($sql);
             header('location:meus.php');
             break;
+        case 7:
+            $sql = "UPDATE anuncio SET status='Em aberto', contratante='' WHERE idAnuncio='$iddapost'";
+            $conecta->query($sql);
+            $conecta->query($deletarInteresse);
+            header('location:meus.php');
+            break;
 	}
 ?>

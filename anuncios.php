@@ -55,6 +55,20 @@
   if($membro == "Vip"){
     $limitePostagem = 10;
   }
+  $existePen = '<span class="ti-bell poointer"></span>';
+  $xi=0;
+  $sql = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser WHERE email = '$logado'");
+  while($exibe = mysqli_fetch_assoc($sql)){
+    $status[$xi] = $exibe["status"];
+    if($status[$xi] == "Pendente"){
+      $existePen = '
+      <a href="meus.php">
+      <span class="ti-bell poointer"></span>
+      <div class="bolinha"></div>
+      </a>';    
+    }
+    $xi++;
+  }
   ?>
 </head>
 <body>
@@ -186,8 +200,8 @@
       </div>
 
       <div class="soocial-icons">
-        <span class="ti-bell poointer"></span>
-        <span class="ti-comments poointer"></span>
+        <?php echo $existePen;?>
+        <!-- <span class="ti-comments poointer"></span> -->
         <div class="poointer">
           <img src="images/img_perfil/<?php echo $perfil;?>">
         </div>

@@ -137,6 +137,11 @@ header{
   align-items: center;
 }
 
+.soocial-icons a{
+  display: flex;
+  align-items: center;
+}
+
 .soocial-icons span,
 .soocial-icons div{
   margin-left: 1.2rem; 
@@ -627,4 +632,13 @@ li.active {
   outline-style: none;
   cursor: pointer;
   color: white;
+}
+
+.bolinha {
+  width: 7px !important;
+  height: 7px !important;
+  background: red;
+  right: 172px;
+  top: 22px;
+  position: absolute;
 }

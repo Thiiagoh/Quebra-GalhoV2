@@ -30,6 +30,21 @@
     $namec = $exibe["nome"];
   }
   $off="hidden";
+
+  $existePen = '<span class="ti-bell poointer"></span>';
+  $xi=0;
+  $sql = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser WHERE email = '$logado'");
+  while($exibe = mysqli_fetch_assoc($sql)){
+    $status[$xi] = $exibe["status"];
+    if($status[$xi] == "Pendente"){
+      $existePen = '
+      <a href="meus.php">
+      <span class="ti-bell poointer"></span>
+      <div class="bolinha"></div>
+      </a>';    
+    }
+    $xi++;
+  }
   ?>
 </head>
 <body>
@@ -69,8 +84,8 @@
       </div> 
 
       <div class="soocial-icons">
-        <span class="ti-bell poointer"></span>
-        <span class="ti-comments poointer"></span>
+        <?php echo $existePen;?>
+        <!-- <span class="ti-comments poointer"></span> -->
         <div class="poointer">
           <img src="images/img_perfil/<?php echo $perfil;?>">
         </div>
@@ -163,8 +178,12 @@
             }elseif ($status[$i] == "Pendente"){
               $sqla = mysqli_query($conecta, "select * from usuario WHERE idUser = '$detalheEm[$i]'");
               while($exibe = mysqli_fetch_assoc($sqla)){
-                $nomeA[$sd] = $exibe["nome"];
-                $nomeB[$sd] = $exibe["sobrenome"];
+                $nomeAA[$sd] = $exibe["nome"];
+                $nomeBB[$sd] = $exibe["sobrenome"];
+                $idUserr[$sd] = $exibe["idUser"];
+
+                $delett[$sd] = "DELETE FROM interesse WHERE idAnuncio='$idPostagem[$i]' and idUser='$idUserr[$sd]'";
+
 
                 echo '<div class="modal fade" id="a'.$idPostagem[$i].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -175,21 +194,21 @@
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
+
                             <form action="empregorem.php" method="POST">
                               <div class="modal-body">
                                 <div class="form-group">
-                                  <label for="exampleFormControlInput1">Contratante: '.$nomeA[$sd].' '.$nomeB[$sd].'</label>
+                                  <label for="exampleFormControlInput1">Contratante: '.$nomeAA[$sd].' '.$nomeBB[$sd].'</label>
                                 </div>
                                 
-                                <div class="form-group">
-                                  <div class="mb-3">
-                                    <label for="exampleFormControlInput1">Emprego '.$nomeA[$sd].'</label>
-                                  </div>
-                                </div>
+                                
                               </div>
                               <div class="modal-footer">
-                                <!--<button type="submit" name="opcao" value="0" class="btn btn-primary btn-sm poointer">Atualizar</button>
-                                <button type="submit" name="opcao" value="1" class="btn btn-danger btn-sm poointer">Excluir</button>-->
+                                <!--<button type="submit" name="opcao" value="0" class="btn btn-primary btn-sm poointer">Atualizar</button>-->
+                                <input type="text" name="deletarinteresse" value="'.$delett[$sd].'" hidden>
+                                <input type="text" name="contratarPostagem" value="'.$idPostagem[$i].'" hidden>
+
+                                <button type="submit" name="opcao" value="7" class="btn btn-danger btn-sm poointer">Cancelar solicitação</button>
                                 <button type="button"  class="btn btn-secondary btn-sm poointer" data-bs-dismiss="modal">Fechar</button>
                               </div>
                             </form>
@@ -200,7 +219,7 @@
                           <div class="caard-body">
                             <span class="ti-briefcase"></span>
                             <div>
-                              <h4>'.$nomeA[$i]." ".$nomeB[$i].'</h4>
+                              <h4>'.$emprego[$i].'</h4>
                               <h5>Alguém está interessado!</h5>
                             </div>
                           </div>
@@ -283,8 +302,8 @@
                         <div class="caard-body">
                           <span class="ti-briefcase"></span>
                           <div>
-                            <h4>'.$nomeA[$p]." ".$nomeB[$p].'</h4>
-                            <h5>'.$emprego[$p].'</h5>
+                            <h4>'.$emprego[$p].'</h4>
+                            <h5>Aguarde contato...</h5>
                           </div>
                         </div>
                         <form action="empregorem.php" method="POST">
