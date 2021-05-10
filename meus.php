@@ -66,6 +66,12 @@
             <span>Anúncios</span>
           </li>
         </a>
+        <a href="assinar.php">
+          <li class="passando">
+            <span class="ti-star"></span>
+            <span>Assinatura</span>
+          </li>
+        </a>
         <a href="info.php">
           <li class="passando">
             <span class="ti-settings"></span>
@@ -181,6 +187,9 @@
                 $nomeAA[$sd] = $exibe["nome"];
                 $nomeBB[$sd] = $exibe["sobrenome"];
                 $idUserr[$sd] = $exibe["idUser"];
+                $city[$sd] = $exibe["cidade"];
+                $state[$sd] = $exibe["estado"];
+                $emailcontato[$sd] = $exibe["emailcontato"];
 
                 $delett[$sd] = "DELETE FROM interesse WHERE idAnuncio='$idPostagem[$i]' and idUser='$idUserr[$sd]'";
 
@@ -199,6 +208,15 @@
                               <div class="modal-body">
                                 <div class="form-group">
                                   <label for="exampleFormControlInput1">Contratante: '.$nomeAA[$sd].' '.$nomeBB[$sd].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Cidade: '.$city[$sd].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Estado: '.$state[$sd].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Email de contato: '.$emailcontato[$sd].'</label>
                                 </div>
                                 
                                 

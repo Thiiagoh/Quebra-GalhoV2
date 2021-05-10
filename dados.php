@@ -107,6 +107,12 @@
             <span>Anúncios</span>
           </a>
         </li>
+        <a href="assinar.php">
+          <li class="passando">
+            <span class="ti-star"></span>
+            <span>Assinatura</span>
+          </li>
+        </a>
         <li class="passando">
           <a href="info.php">
             <span class="ti-settings"></span>

@@ -113,18 +113,24 @@
 
     <div class="siidebar-menu">
       <ul>
-        <li class="passando">
-          <a href="anuncios.php">
+        <a href="anuncios.php">
+          <li class="passando">
             <span class="ti-home"></span>
             <span>Anúncios</span>
-          </a>
-        </li>
-        <li class="passando active">
-          <a href="#">
+          </li>
+        </a>
+        <a href="#">
+          <li class="passando active">
+            <span class="ti-star"></span>
+            <span>Assinatura</span>
+          </li>
+        </a>
+        <a href="info.php">
+          <li class="passando">
             <span class="ti-settings"></span>
             <span>Conta</span>
-          </a>
-        </li>
+          </li>
+        </a>
       </ul>
     </div>
   </div>

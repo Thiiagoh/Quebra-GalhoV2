@@ -67,6 +67,12 @@
             <span>Anúncios</span>
           </li>
         </a>
+        <a href="assinar.php">
+          <li class="passando">
+            <span class="ti-star"></span>
+            <span>Assinatura</span>
+          </li>
+        </a>
         <a href="info.php">
           <li class="passando">
             <span class="ti-settings"></span>
@@ -177,18 +183,64 @@
           <?php
           $p=0;
           //$sql = mysqli_query($conecta, "select * from usuario INNER JOIN anuncio ON usuario.idUser = anuncio.idUser WHERE email = '$logado'");
-          $sql = mysqli_query($conecta, "select i.idInteresse, i.idUser, i.idAnuncio, a.emprego, u.nome, u.sobrenome, a.status from interesse i INNER JOIN anuncio a ON i.idAnuncio = a.idAnuncio INNER JOIN usuario u ON a.idUser = u.idUser where i.idUser='$id'");
+          $sql = mysqli_query($conecta, "select i.idInteresse, i.idUser, i.idAnuncio, a.emprego, a.detalhes, u.nome, u.sobrenome, u.cidade, u.estado, u.emailcontato, u.numero, a.status from interesse i INNER JOIN anuncio a ON i.idAnuncio = a.idAnuncio INNER JOIN usuario u ON a.idUser = u.idUser where i.idUser='$id'");
           while($exibe = mysqli_fetch_assoc($sql)){
             $idPostagem[$p] = $exibe["idAnuncio"];
             $idInteresse[$p] = $exibe["idInteresse"];
             $nomeA[$p] = $exibe["nome"];
             $nomeB[$p] = $exibe["sobrenome"];
             $emprego[$p] = $exibe["emprego"];
+            $detalhe[$p] = $exibe["detalhes"];
+            $cidade[$p] = $exibe["cidade"];
+            $estado[$p] = $exibe["estado"];
+            $emailcontato[$p] = $exibe["emailcontato"];
+            $telefone[$p] = $exibe["numero"];
             $status[$p] = $exibe["status"];
 
             $delet[$p] = "DELETE FROM interesse WHERE idInteresse='$idInteresse[$p]'";
 
             if($status[$p] == "Contratado"){
+              echo '<div class="modal fade" id="a'.$idPostagem[$p].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Informações do Autônomo</h5>
+                              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                              <div class="modal-body">
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Nome: '.$nomeA[$p]." ".$nomeB[$p].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Emprego: '.$emprego[$p].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Detalhes: '.$detalhe[$p].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Cidade: '.$cidade[$p].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Estado: '.$estado[$p].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Email de contato: '.$emailcontato[$p].'</label>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Telefone: '.$telefone[$p].'</label>
+                                </div>
+                                
+                                
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button"  class="btn btn-secondary btn-sm poointer" data-bs-dismiss="modal">Fechar</button>
+                              </div>
+                          </div>
+                        </div>
+                      </div>';
               echo '  <div class="caard-single">
                         <div class="caard-body">
                           <span class="ti-briefcase"></span>
@@ -197,12 +249,12 @@
                             <h5>'.$emprego[$p].'</h5>
                           </div>
                         </div>
-                        <form action="empregorem.php" method="POST">
                           <div class="caard-footer">
+                            <button data-bs-toggle="modal" data-bs-target="#a'.$idPostagem[$p].'" class="butao d-flex justify-content-center align-items-center">Entrar em contato</button>
+                            <form action="empregorem.php" method="POST">
                             <input type="text" name="deletarinteresse" value="'.$delet[$p].'" hidden>
                             <input type="text" name="contratarPostagem" value="'.$idPostagem[$p].'" hidden>
                             <input type="text" name="contratarPostagemId" value="'.$id.'" hidden>
-                            <button class="butao d-flex justify-content-center align-items-center">Entrar em contato</button>
                             <button class="butaored d-flex justify-content-center align-items-center" type="submit" name="opcao" value="2">Remover</button>
                           </div>
                         </form>

@@ -143,6 +143,12 @@
             <span>Anúncios</span>
           </li>
         </a>
+        <a href="assinar.php">
+          <li class="passando">
+            <span class="ti-star"></span>
+            <span>Assinatura</span>
+          </li>
+        </a>
         <!-- <li>
           <a href="">
             <span class="ti-face-smile"></span>
