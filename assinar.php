@@ -204,7 +204,7 @@
               <div class="col">
                 <div class="card mb-4 rounded-3 shadow-sm <?php echo $div2;?>">
                   <div class="card-header py-3 <?php echo $$div22;?>">
-                    <h4 class="my-0 fw-normal">Membro</h4>
+                    <h4 class="my-0 fw-normal">Básico</h4>
                   </div>
                   <div class="card-body">
                     <form action="empregorem.php" method="POST">
@@ -251,7 +251,7 @@
                   <tr>
                     <th style="width: 34%;"></th>
                     <th style="width: 22%;">Grátis</th>
-                    <th style="width: 22%;">Membro</th>
+                    <th style="width: 22%;">Básico</th>
                     <th style="width: 22%;">Vip</th>
                   </tr>
                 </thead>

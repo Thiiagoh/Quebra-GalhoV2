@@ -15,7 +15,7 @@
     session_unset();
     echo "<script>window.location.href = 'index.php';</script>";
   }
-
+  $search = $_GET['search'];
   $logado = $_SESSION['email'];
   include_once "conectar.php";
   $sql = mysqli_query($conecta, "select * from usuario where email ='$logado'");
@@ -137,8 +137,8 @@
 
     <div class="siidebar-menu">
       <ul>
-        <a href="#">
-          <li class="passando active">
+        <a href="anuncios.php">
+          <li class="passando">
             <span class="ti-home"></span>
             <span>Anúncios</span>
           </li>
@@ -199,7 +199,7 @@
     <header>
       <div class="seearch-wrapper">
         <span class="ti-search"></span>
-        <form action="busca.php" method="GET">
+        <form action="" method="POST">
           <!-- SELECT * FROM anuncios WHERE emprego LIKE '%ana%'; -->
           <input type="search" placeholder="Search" name="search">
         </form>
@@ -263,11 +263,11 @@
           }
         }
       ?>
-      <h2 class="daash-title">Trabalhadores</h2>
+      <h2 class="daash-title">Anuncios encontrados</h2>
       <div class="daash-cards">
         <?php
         $i=0;
-        $sql = mysqli_query($conecta, "select * from anuncio INNER JOIN usuario ON anuncio.idUser = usuario.idUser");
+        $sql = mysqli_query($conecta, "select * from anuncio INNER JOIN usuario ON anuncio.idUser = usuario.idUser WHERE emprego LIKE '%$search%'");
         while($exibe = mysqli_fetch_assoc($sql)){
           $idPostagem[$i] = $exibe["idAnuncio"];
           $nomeA[$i] = $exibe["nome"];
