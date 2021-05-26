@@ -176,74 +176,72 @@
           </symbol>
         </svg>
 
+
+
         <div class="container py-3">
           <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
             <h1 class="display-4 fw-normal">Assinaturas</h1>
-            <p class="fs-5 text-muted">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+            <p class="fs-5 text-muted">Escolha abaixo o plano que melhor lhe atenderá.</p>
           </div>
 
-          <main>
+          <?php
+            if ($choose == "1"){
+              echo '<main>
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
               <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm <?php echo $div1;?>">
-                  <div class="card-header py-3 <?php echo $div11?>">
+                <div class="card mb-4 rounded-3 shadow-sm '.$div1.'">
+                  <div class="card-header py-3 '.$div11.'">
                     <h4 class="my-0 fw-normal">Grátis</h4>
                   </div>
                   <div class="card-body">
                       <h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mês</small></h1>
                       <ul class="list-unstyled mt-3 mb-4">
-                        <li>2 Anúncios</li>
-                        <li>...</li>
-                        <li>...</li>
-                        <li>...</li>
+                        <li>1 Postagem</li>
+                        <li>Contém Anúncios</li>
                       </ul>
-                      <button type="button" class="w-100 btn btn-lg btn-outline-primary"><?php echo $gratisNormal;?></button>
+                      <button type="button" class="w-100 btn btn-lg btn-outline-primary">'.$gratisNormal.'</button>
                   </div>
                 </div>
               </div>
               <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm <?php echo $div2;?>">
-                  <div class="card-header py-3 <?php echo $$div22;?>">
+                <div class="card mb-4 rounded-3 shadow-sm '.$div2.'">
+                  <div class="card-header py-3 '.$div22.'">
                     <h4 class="my-0 fw-normal">Básico</h4>
                   </div>
                   <div class="card-body">
                     <form action="empregorem.php" method="POST">
-                      <input type="text" name="conta" value="<?php echo $id;?>" hidden>
+                      <input type="text" name="conta" value="'.$id.'" hidden>
                       <h1 class="card-title pricing-card-title">$5<small class="text-muted fw-light">/mês</small></h1>
                       <ul class="list-unstyled mt-3 mb-4">
-                        <li>5 Anúncios</li>
-                        <li>...</li>
-                        <li>...</li>
-                        <li>...</li>
+                        <li>3 Postagens</li>
+                        <li>Sem anúncios</li>
                       </ul>
-                      <button type="submit" name="opcao" value="4" class="w-100 btn btn-lg btn-primary"><?php echo $membroComprado;?></button>
+                      <button type="submit" name="opcao" value="4" class="w-100 btn btn-lg btn-primary">'.$membroComprado.'</button>
                     </form>
                   </div>
                 </div>
               </div>
               <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm <?php echo $div3;?>">
-                  <div class="card-header py-3 <?php echo $div33;?>">
+                <div class="card mb-4 rounded-3 shadow-sm '.$div3.'">
+                  <div class="card-header py-3 '.$div33.'">
                     <h4 class="my-0 fw-normal">Vip</h4>
                   </div>
                   <div class="card-body">
                     <form action="empregorem.php" method="POST">
-                      <input type="text" name="conta" value="<?php echo $id;?>" hidden>
+                      <input type="text" name="conta" value="'.$id.'" hidden>
                       <h1 class="card-title pricing-card-title">$10<small class="text-muted fw-light">/mês</small></h1>
                       <ul class="list-unstyled mt-3 mb-4">
-                        <li>10 Anúncios</li>
-                        <li>...</li>
-                        <li>...</li>
-                        <li>...</li>
+                        <li>10 Postagens</li>
+                        <li>Sem anúncios</li>
                       </ul>
-                      <button type="submit" name="opcao" value="5" class="w-100 btn btn-lg btn-primary"><?php echo $vipComprado;?></button>
+                      <button type="submit" name="opcao" value="5" class="w-100 btn btn-lg btn-primary">'.$vipComprado.'</button>
                     </form>
                   </div>
                 </div>
               </div>
             </div>
 
-            <h2 class="display-6 text-center mb-4">Comparar planos</h2>
+            <!-- <h2 class="display-6 text-center mb-4">Comparar planos</h2>
 
             <div class="table-responsive">
               <table class="table text-center">
@@ -297,8 +295,128 @@
                   </tr>
                 </tbody>
               </table>
+            </div> -->
+                    </main>';
+            }else{
+              echo '<main>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm '.$div1.'">
+                  <div class="card-header py-3 '.$div11.'">
+                    <h4 class="my-0 fw-normal">Grátis</h4>
+                  </div>
+                  <div class="card-body">
+                      <h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mês</small></h1>
+                      <ul class="list-unstyled mt-3 mb-4">
+                        <li>1 Contrato</li>
+                        <li>Contém Anúncios</li>
+                        <li></li>
+                        <li></li>
+                      </ul>
+                      <button type="button" class="w-100 btn btn-lg btn-outline-primary">'.$gratisNormal.'</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm '.$div2.'">
+                  <div class="card-header py-3 '.$div22.'">
+                    <h4 class="my-0 fw-normal">Básico</h4>
+                  </div>
+                  <div class="card-body">
+                    <form action="empregorem.php" method="POST">
+                      <input type="text" name="conta" value="'.$id.'" hidden>
+                      <h1 class="card-title pricing-card-title">$5<small class="text-muted fw-light">/mês</small></h1>
+                      <ul class="list-unstyled mt-3 mb-4">
+                        <li>5 Contratos</li>
+                        <li>Sem anúncios</li>
+                        <li></li>
+                        <li></li>
+                      </ul>
+                      <button type="submit" name="opcao" value="4" class="w-100 btn btn-lg btn-primary">'.$membroComprado.'</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm '.$div3.'">
+                  <div class="card-header py-3 '.$div33.'">
+                    <h4 class="my-0 fw-normal">Vip</h4>
+                  </div>
+                  <div class="card-body">
+                    <form action="empregorem.php" method="POST">
+                      <input type="text" name="conta" value="'.$id.'" hidden>
+                      <h1 class="card-title pricing-card-title">$10<small class="text-muted fw-light">/mês</small></h1>
+                      <ul class="list-unstyled mt-3 mb-4">
+                        <li>Contratos Ilimitados</li>
+                        <li>Sem anúncios</li>
+                        <li></li>
+                        <li></li>
+                      </ul>
+                      <button type="submit" name="opcao" value="5" class="w-100 btn btn-lg btn-primary">'.$vipComprado.'</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-          </main>
+
+            <!-- <h2 class="display-6 text-center mb-4">Comparar planos</h2>
+
+            <div class="table-responsive">
+              <table class="table text-center">
+                <thead>
+                  <tr>
+                    <th style="width: 34%;"></th>
+                    <th style="width: 22%;">Grátis</th>
+                    <th style="width: 22%;">Básico</th>
+                    <th style="width: 22%;">Vip</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-start">Público</th>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">Privado</th>
+                    <td></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                  </tr>
+                </tbody>
+
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-start">Permissions</th>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">Sharing</th>
+                    <td></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">Unlimited members</th>
+                    <td></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">Extra security</th>
+                    <td></td>
+                    <td></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div> -->
+                    </main>';
+            }
+          ?>
 
           
         </div>

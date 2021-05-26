@@ -263,7 +263,7 @@
           }
         }
       ?>
-      <h2 class="daash-title">Trabalhadores</h2>
+      <h2 class="daash-title">Autônomos disponíveis</h2>
       <div class="daash-cards">
         <?php
         $i=0;
